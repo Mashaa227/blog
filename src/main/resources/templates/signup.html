@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="header">
+    <meta charset="UTF-8">
+    <title>Post List</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+          crossorigin="anonymous">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark" th:fragment="navbar">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Post app</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/}">All Post</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/register}">Register</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<br /><br />
+<div class="container">
+    <div class="row col-md-8 offset-md-2">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="text-center">Sign Up</h2>
+            </div>
+            <div th:if="${param.success}">
+                <div class="alert alert-success">
+                    Registration successful. Please login.
+                </div>
+            </div>
+            <div th:if="${param.error}">
+                <div class="alert alert-danger">
+                    Registration failed. Please try again.
+                </div>
+            </div>
+            <div class="card-body">
+                <form th:action="@{/register/save}" th:object="${registrationDto}" method="post" role="form">
+                    <div class="form-group mb-3">
+                        <label class="form-label">First Name</label>
+                        <input type="text" class="form-control" th:field="*{firstName}" placeholder="Enter First Name" required>
+                        <p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="text-danger"></p>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label">Last Name</label>
+                        <input type="text" class="form-control" th:field="*{lastName}"  placeholder="Enter Last Name" required>
+                        <p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="text-danger"></p>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-control" th:field="*{email}" placeholder="Enter Email" required>
+                        <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger"></p>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label">Password</label>
+                        <input type="password" class="form-control" th:field="*{password}" placeholder="Enter Password" required>
+                        <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-danger"></p>
+                    </div>
+                    <div class="form-group mb-3">
+                        <button type="submit" class="btn btn-primary">Sign Up</button>
+                        <span>
+                            Already have an account? <a th:href="@{/login}">Login here</a>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="footer-copyright text-center bg-dark text-white py-3 text-lg-left fixed-bottom">
+    <div>
+        <strong>
+            Copyright &copy; 2025 <a href="https://github.com/Mashaa227">Mashak github</a>
+            <a href="https://www.linkedin.com/in/mashaa8816">Mashak github</a>
+            All rights reserved.
+        </strong>
+    </div>
+</footer>
+</body>
+</html>
