@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:replace="admin/header :: header"></div>
+<body>
+<div th:replace="admin/header :: navbar"></div>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="text-center">Post List</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <table class="table table-striped table-hover table-bordered">
+                <thead class="table-dark">
+                <tr>
+                    <th style="width: 10%">ID</th>
+                    <th style="width: 20%">Title</th>
+                    <th style="width: 20%">Content</th>
+                    <th style="width: 10%">URL</th>
+                    <th style="width: 20%">Short Description</th>
+                    <th style="width: 15%">Created At</th>
+                    <th style="width: 15%">Updated At</th>
+                    <th style="width: 10%">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="post : ${postDtoList}">
+                    <td th:text="${post.id}"></td>
+                    <td th:text="${post.title}"></td>
+                    <td th:text="${post.content}"></td>
+                    <td th:text="${post.url}"></td>
+                    <td th:text="${post.shortDescription}"></td>
+                    <td th:text="${post.createdAt}"></td>
+                    <td th:text="${post.updatedAt}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div th:replace="admin/footer :: footer"></div>
+</body>
+</html>
