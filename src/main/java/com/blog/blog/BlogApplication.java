@@ -17,14 +17,14 @@ public class BlogApplication {
     @Bean
     public CommandLineRunner initRoles(RoleRepository roleRepository) {
         return args -> {
-            // Create USER role if not exists
+            // Create ROLE_USER if not exists
             if (roleRepository.findByName("ROLE_USER") == null) {
                 Role userRole = new Role();
                 userRole.setName("ROLE_USER");
                 roleRepository.save(userRole);
             }
 
-            // Create ADMIN role if not exists
+            // Create ROLE_ADMIN if not exists
             if (roleRepository.findByName("ROLE_ADMIN") == null) {
                 Role adminRole = new Role();
                 adminRole.setName("ROLE_ADMIN");
@@ -32,4 +32,5 @@ public class BlogApplication {
             }
         };
     }
+
 }

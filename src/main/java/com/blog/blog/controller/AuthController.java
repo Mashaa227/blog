@@ -32,8 +32,13 @@ public class AuthController {
             model.addAttribute("registrationDto", registrationDto);
             return "register";
         }
-
         userService.saveUser(registrationDto);
         return "redirect:/register?success";
+    }
+
+    //Handler method to handle login request
+    @GetMapping("/login")
+    public String showLoginForm() {
+        return "login";
     }
 }
