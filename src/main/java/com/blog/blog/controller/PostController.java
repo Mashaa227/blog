@@ -22,7 +22,7 @@ public class PostController {
     public String post(Model model) {
          List<PostDto> postDtoList = postService.findAllPost();
          model.addAttribute("postDtoList", postDtoList);
-         return "/admin/posts";
+         return "admin/posts";
     }
 
     //create handler method for newPost
@@ -30,7 +30,7 @@ public class PostController {
     public String newPost(Model model) {
         PostDto postDto = new PostDto();
         model.addAttribute("postDto", postDto);
-        return "/admin/newPost";
+        return "admin/newPost";
     }
 
     //create handler method for savePost
@@ -38,7 +38,7 @@ public class PostController {
     public String savePost(@Valid @ModelAttribute PostDto postDto, BindingResult result, Model model) {
         if(result.hasErrors()){
             model.addAttribute("postDto", postDto);
-            return "/admin/newPost";
+            return "admin/newPost";
         }
         postDto.setUrl(getUri(postDto.getTitle()));
         postService.createPost(postDto);
@@ -50,7 +50,7 @@ public class PostController {
     public String editPost(@PathVariable Long id, Model model) {
         PostDto postDto = postService.getPostById(id);
         model.addAttribute("postDto", postDto);
-        return "/admin/editPost";
+        return "admin/editPost";
     }
 
     //Handler method to handle delete post
@@ -65,7 +65,7 @@ public class PostController {
     public String viewPost(@PathVariable Long id, Model model) {
         PostDto postDto = postService.getPostById(id);
         model.addAttribute("postDto", postDto);
-        return "/admin/viewPost";
+        return "admin/viewPost";
     }
 
     //Handler method to handle search post
@@ -73,7 +73,7 @@ public class PostController {
     public String searchPost(@RequestParam String query, Model model) {
         List<PostDto> postDtoList = postService.searchPosts(query);
         model.addAttribute("postDtoList", postDtoList);
-        return "/admin/posts";
+        return "admin/posts";
     }
 
     private static String getUri(String postTitle) {
